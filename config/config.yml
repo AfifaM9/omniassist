@@ -1,0 +1,17 @@
+app:
+  name: "OmniAssist"
+  version: "2026.1"
+  description: "Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit"
+
+models:
+  primary: "gemini-3.5-flash-lite"
+  fallbacks:
+    - "gemini-3.1-flash-lite"
+    - "gemini-3-flash"
+    - "gemini-2.5-flash"
+    - "gemini-2.5-flash-lite"
+    - "gemma-4"
+
+agent:
+  max_iterations: 10
+  temperature: 0.2

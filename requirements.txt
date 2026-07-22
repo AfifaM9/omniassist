@@ -1,0 +1,4 @@
+google-genai>=0.1.0
+duckduckgo-search>=5.0.0
+rich>=13.0.0
+PyYAML>=6.0
