@@ -39,28 +39,58 @@ Whether you're managing local system scripts, pulling live documentation, or orc
 ## Architecture & Directory Structure
 
 ```text
-omniassist/
-├── config/
-│   └── config.yml
-├── core/
-│   ├── agent.py
-│   ├── reasoning.py
-│   ├── router.py
-│   ├── selfmodify.py
-│   └── state.py
-├── interfaces/
-│   └── cli.py
-├── mcp_tools/
-│   └── registry.py
-├── memory/
-├── subagents/
-├── tests/
-├── .env.example
-├── .gitignore
-├── LICENSE.txt
-├── README.md
-├── main.py
-└── requirements.txt
+omniassist
+├── .env                     # Local environment variables (API keys, ports, secrets - ignored by git)
+├── .env.example             # Environment variable template/defaults (committed to git)
+├── .gitignore               # Git exclusion rules (env files, venvs, cache, logs)
+├── .github/                 # GitHub repository metadata & community guidelines
+│   ├── CODE_OF_CONDUCT.md   # Community behavior standards and enforcement guidelines
+│   ├── CONTRIBUTING.md      # Guidelines for submitting pull requests, issues, and code
+│   ├── SECURITY.md          # Vulnerability reporting process and security policies
+│   ├── PULL_REQUEST_TEMPLATE.md # Standard PR checklist, scope, and testing template
+│   └── ISSUE_TEMPLATE/      # GitHub issue creation templates
+│       ├── bug_report.md    # Template for reporting bugs, errors, and reproducible crashes
+│       └── feature_request.md # Template for proposing new sub-agents, tools, or enhancements
+├── venv/                    # Virtual environment directory
+│   └── # ... run python -m venv ./venv to see contents ...
+├── LICENSE.txt              # MIT License terms and copyright notice
+├── README.md                # Project documentation, architecture overview, and setup guide
+├── config/                  # Global configuration directory
+│   └── config.yml           # Unified YAML configuration file for models, paths, and options
+├── core/                    # Core agent orchestrator & execution loop
+│   ├── agent.py             # Main OmniAssist class (lifecycle, primary agent loop)
+│   ├── reasoning.py         # Cognitive engine (ReAct, Plan-and-Solve, Self-Reflection)
+│   ├── selfmodify.py        # Code self-rewriting, agent update, and runtime patch logic
+│   ├── state.py             # Active conversation state & runtime context tracking
+│   └── router.py            # Task routing between internal sub-agents and MCP tools
+├── subagents/               # Specialized sub-agents supervised by OmniAssist
+│   ├── base.py              # Abstract base class for specialized sub-agents
+│   ├── research_agent.py    # Information retrieval & document synthesis sub-agent
+│   ├── code_agent.py        # Code generation, execution, and debugging sub-agent
+│   └── planner_agent.py     # Complex task breakdown & multi-step planning sub-agent
+├── memory/                  # Multi-tiered memory architecture
+│   ├── conversation.py      # Working memory & short-term message buffer
+│   ├── vector_store.py      # Long-term semantic memory (RAG vector index)
+│   └── session.py           # Session persistence across agent reboots
+├── mcp_tools/               # Model Context Protocol (MCP) server & tool integrations
+│   ├── registry.py          # Dynamic MCP server connection manager and tool loader
+│   ├── search_tools.py      # MCP search tools (web scraping, API access, knowledge search)
+│   ├── code_runner.py       # MCP code execution environment (sandboxed evaluation)
+│   ├── file_tools.py        # MCP filesystem interface (I/O, directory traversal, file editing)
+│   ├── shell_tool.py        # Tool interface for executing system shell commands
+│   ├── python_tool.py       # Tool interface for evaluating Python snippets
+│   ├── ddgs_search.py       # DuckDuckGo web search integration wrapper via `ddgs`
+│   ├── basic_calc.py        # Arithmetic and standard math tool helper
+│   └── robocalc.py          # Complex calculator (cmath)
+├── interfaces/              # I/O adapters & communication channels
+│   ├── cli.py               # Interactive terminal interface for OmniAssist
+│   ├── api/                 # FastAPI server (REST endpoints & WebSocket streams)
+│   └── adapters/            # External messaging adapters (Slack, SSH, terminal agents)
+├── tests/                   # Automated test suite
+│   ├── test_core.py         # Unit tests for reasoning loops and agent routing
+│   └── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
+├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
+└── main.py                  # Entry point script (contains embedded model priority & fallback notes)
 ```
 
 ---
