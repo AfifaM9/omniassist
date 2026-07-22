@@ -40,26 +40,27 @@ Whether you're managing local system scripts, pulling live documentation, or orc
 
 ```text
 omniassist/
-├── config/             # System and model configuration files
-├── core/               # Core agent execution loops, state, and routers
-│   ├── agent.py        # Primary OmniAssist orchestration class
-│   ├── reasoning.py    # Cognitive plan evaluation engine
-│   ├── router.py       # Task routing and tool execution dispatcher
-│   ├── selfmodify.py   # Autonomous code-patching utilities
-│   └── state.py        # Conversation history and session state tracking
-├── interfaces/         # Terminal and user interface definitions
-│   └── cli.py          # Rich-powered command-line interface loop
-├── mcp_tools/          # Model Context Protocol tool integrations
-│   └── registry.py     # Tool registration and callable filtering engine
-├── memory/             # Persistent local memory and state storage
-├── subagents/          # Specialized worker subagents
-├── tests/              # Test suite modules
-├── .env.example        # Environment variable template
-├── .gitignore          # Git exclusion filters
-├── LICENSE.txt         # Licensing terms
-├── README.md           # Project documentation
-├── main.py             # Main entry point script
-└── requirements.txt    # Python package dependencies
+├── config/
+│   └── config.yml
+├── core/
+│   ├── agent.py
+│   ├── reasoning.py
+│   ├── router.py
+│   ├── selfmodify.py
+│   └── state.py
+├── interfaces/
+│   └── cli.py
+├── mcp_tools/
+│   └── registry.py
+├── memory/
+├── subagents/
+├── tests/
+├── .env.example
+├── .gitignore
+├── LICENSE.txt
+├── README.md
+├── main.py
+└── requirements.txt
 ```
 
 ---
@@ -132,6 +133,13 @@ Contributions are welcome! Please check the `.github/` directory for code of con
 3. Commit your changes using casual, descriptive commit messages.
 4. Push to the branch (`git push origin feature/amazing-feature`).
 5. Open a Pull Request.
+
+Once ready to publish changes:
+```bash
+git add .
+git commit -m "update full directory tree in readme and tidy up documentation"
+git push origin main
+```
 
 ---
 
