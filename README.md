@@ -75,20 +75,15 @@ omniassist/
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/omniassist.git
+   git clone https://github.com/AfifaM9/omniassist.git
    cd omniassist
    ```
 
-2. **Create and Activate a Virtual Environment:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
-
-3. **Install Dependencies:**
+2. **Install Dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
+   *(Power users: virtual environments are optional and can be skipped if managing global or system environments directly).*
 
 ---
 
