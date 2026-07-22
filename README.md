@@ -90,7 +90,8 @@ omniassist
 │   ├── test_core.py         # Unit tests for reasoning loops and agent routing
 │   └── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
 ├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
-└── main.py                  # Entry point script (contains embedded model priority & fallback notes)
+├── main.py                  # Entry point script (contains embedded model priority & fallback notes)
+└── ann_summary_report.md    # ANN Summary Report
 ```
 
 ---
