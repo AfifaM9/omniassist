@@ -41,12 +41,27 @@ class OmniAssist:
         os.environ["GOOGLE_API_KEY"] = api_key
         self.client = genai.Client(api_key=api_key)
 
+    def _build_system_prompt(self, plan: str) -> str:
+        """Generates an explicit system prompt directing multi-step autonomous behavior."""
+        return f"""You are OmniAssist, an autonomous, highly capable AI operational agent.
+
+### CORE INSTRUCTIONS & AUTONOMY:
+1. **Multi-Step Execution**: You are equipped with direct tool access. When given a complex goal, break it down into sequential, logical sub-steps. Do not ask the user for permission to execute sub-steps—take initiative using available tools.
+2. **Tool Feedback Loops**: Execute tools sequentially. Inspect the results of each tool execution, evaluate if your sub-goal was achieved, adapt if errors occur, and trigger the next step until the overall task is fully resolved.
+3. **Problem-Solving**: If a tool returns an error or incomplete data, retry with modified parameters or try an alternative tool before giving up.
+4. **Final Response**: Once all tool calls and multi-step actions are complete, synthesize a clean, concise, and structured final summary for the user.
+
+### CURRENT CONTEXT & STRATEGIC PLAN:
+{plan}
+"""
+
     def run(self, prompt: str) -> str:
         """Executes agent execution loop safely catching internal tool registration issues."""
         self.state.add_message("user", prompt)
         
         plan = self.reasoning.evaluate_plan(prompt)
-        system_prompt = f"You are OmniAssist, an advanced AI operational agent. Context plan: {plan}."
+        system_prompt = self._build_system_prompt(plan)
+#f"You are OmniAssist, an advanced AI operational agent. Context plan: {plan}."
 
         try:
             # Safely filter tools to only include true Python callables, entirely avoiding DDGS class attribute bugs
