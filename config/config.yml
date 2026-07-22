@@ -4,13 +4,14 @@ app:
   description: "Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit"
 
 models:
-  primary: "gemini-3.5-flash-lite"
+  primary: "gemini-3.5-flash-lite" #"gemma-4-31B-it"
   fallbacks:
     - "gemini-3.1-flash-lite"
     - "gemini-3-flash"
     - "gemini-2.5-flash"
     - "gemini-2.5-flash-lite"
-    - "gemma-4"
+    - "gemma-4-31B-it"
+    - "gemma-4-26B-A4B-it"
 
 agent:
   max_iterations: 10
