@@ -22,4 +22,5 @@ By participating, you agree to abide by our community standards. Be respectful, 
 
 4. **Submitting a Pull Request**
    - Push your branch to your fork and submit a Pull Request.
+   - It's best to add a **Before vs. After** when needed
    - Ensure all tests pass before requesting a review.
