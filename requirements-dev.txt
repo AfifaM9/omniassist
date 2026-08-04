@@ -1,3 +1,4 @@
+-r requirements.txt
+
 # Development dependencies
 pytest>=7.0.0
-unittest2>=1.1.0
