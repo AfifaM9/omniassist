@@ -88,8 +88,11 @@ omniassist
 │   └── adapters/            # External messaging adapters (Slack, SSH, terminal agents)
 ├── tests/                   # Automated test suite
 │   ├── test_core.py         # Unit tests for reasoning loops and agent routing
-│   └── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
+│   ├── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
+│   └── test_shell_tool.py   # Security tests for shell command blocking
 ├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
+├── requirements-dev.txt     # Dev dependencies (includes -r requirements.txt)
+├── requirements-dev-2.txt   # Standalone dev dependencies (pytest only)
 ├── main.py                  # Entry point script (contains embedded model priority & fallback notes)
 └── ann_summary_report.md    # ANN Summary Report
 ```
