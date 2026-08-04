@@ -1,0 +1,2 @@
+# Development dependencies (standalone)
+pytest>=7.0.0
