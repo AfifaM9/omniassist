@@ -6,6 +6,7 @@ Please include a summary of the change and which issue is fixed. Please also inc
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
+- [ ] Other: 
 
 ## How Has This Been Tested?
 Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce.
