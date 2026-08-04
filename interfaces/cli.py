@@ -1,4 +1,5 @@
 import sys
+import re
 import readline
 from rich.console import Console
 from rich.panel import Panel
@@ -6,6 +7,8 @@ from rich.markdown import Markdown
 from core.agent import OmniAssist
 
 console = Console()
+
+QUIT_PATTERN = re.compile(r'^(exit|quit|q)$', re.IGNORECASE)
 
 def main():
     """Interactive CLI rendering responses cleanly using Rich Markdown panels."""
@@ -15,7 +18,7 @@ def main():
         "Autonomous System Services Integration Toolkit (2026.2)[/italic]",
         border_style="cyan"
     ))
-    console.print("[dim]Type 'exit' or 'quit' to terminate session.[/dim]\n")
+    console.print("[dim]Type 'exit', 'quit', or 'q' to terminate session.[/dim]\n")
     
     try:
         agent = OmniAssist()
@@ -28,7 +31,7 @@ def main():
             user_input = console.input("[bold green]You:[/bold green] ").strip()
             if not user_input:
                 continue
-            if user_input.lower() in ["exit", "quit"]:
+            if QUIT_PATTERN.match(user_input):
                 console.print("[yellow]Exiting OmniAssist CLI. Goodbye![/yellow]")
                 break
             
@@ -44,7 +47,7 @@ def main():
             console.print()
             
         except (KeyboardInterrupt, EOFError):
-            console.print("\n[yellow]Session interrupted. Type 'exit' to quit properly.[/yellow]")
+            console.print("\n[yellow]Session interrupted. Type 'exit', 'quit', or 'q' to quit properly.[/yellow]")
             continue
         except Exception as cli_err:
             console.print(f"\n[bold red]CLI Trapped Error:[/bold red] {cli_err}\n")

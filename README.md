@@ -155,7 +155,7 @@ python main.py
 ```
 
 Once loaded, you can chat with OmniAssist or issue direct commands:
-- Type `exit` or `quit` to terminate the session.
+- Type `exit`, `quit`, or `q` to terminate the session (case insensitive).
 - Run system queries or file operations directly through the agent.
 
 ---
