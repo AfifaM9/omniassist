@@ -178,6 +178,7 @@ Contributions are welcome! Please check the `.github/` directory for code of con
 3. Commit your changes using casual, descriptive commit messages.
 4. Push to the branch (`git push origin feature/amazing-feature`).
 5. Open a Pull Request.
+   * Add a **Before vs. After** if needed
 
 Once ready to publish changes:
 ```bash
@@ -190,4 +191,4 @@ git push origin main
 
 ## License
 
-Distributed under the terms specified in [LICENSE.txt](LICENSE.txt).
+Distributed under the terms specified in [`LICENSE.txt`](LICENSE.txt).
