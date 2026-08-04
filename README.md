@@ -111,11 +111,22 @@ omniassist
    cd omniassist
    ```
 
-2. **Install Dependencies:**
+2. **Install Dependencies** (choose one method):
+
+   **Method A:** Install `requirements.txt`
    ```bash
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
-   *(Power users: virtual environments are optional and can be skipped if managing global or system environments directly).*
+
+   **Method B:** Or, Install `requirements-dev.txt` (includes `requirements.txt`)
+   ```bash
+   python -m pip install -r requirements-dev.txt
+   ```
+
+   **Method C:** Concatenate requirements files
+   ```bash
+   python -m pip install -r requirements.txt requirements-dev-2.txt
+   ```
 
 ---
 
