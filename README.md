@@ -1,5 +1,11 @@
 # OmniAssist 🚀
 
+![CI](https://img.shields.io/github/actions/workflow/status/AfifaM9/omniassist/ci.yml?label=CI)
+![Lint](https://img.shields.io/github/actions/workflow/status/AfifaM9/omniassist/lint.yml?label=Lint)
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Version](https://img.shields.io/github/v/tag/AfifaM9/omniassist?label=version)
+
 Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.2)
 
 ---
