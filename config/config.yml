@@ -1,6 +1,6 @@
 app:
   name: "OmniAssist"
-  version: "2026.2"
+  version: "2026.3"
   description: "Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit"
 
 models:

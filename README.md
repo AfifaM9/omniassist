@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/github/v/tag/AfifaM9/omniassist?label=version)
 
-Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.2)
+Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.3)
 
 ---
 
@@ -95,7 +95,8 @@ omniassist
 ├── tests/                   # Automated test suite
 │   ├── test_core.py         # Unit tests for reasoning loops and agent routing
 │   ├── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
-│   └── test_shell_tool.py   # Security tests for shell command blocking
+│   ├── test_shell_tool.py   # Security tests for shell command blocking
+│   └── test_cli.py          # Tests for CLI slash commands
 ├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
 ├── requirements-dev.txt     # Dev dependencies (includes -r requirements.txt)
 ├── requirements-dev-2.txt   # Standalone dev dependencies (pytest only)
@@ -164,6 +165,7 @@ python main.py
 ```
 
 Once loaded, you can chat with OmniAssist or issue direct commands:
+- Type `/help` to see available slash commands.
 - Type `exit`, `quit`, or `q` to terminate the session (case insensitive).
 - Run system queries or file operations directly through the agent.
 
