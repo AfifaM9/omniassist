@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
-## [v2026.2]
+## [v2026.2] - 2026-08-04
 
 ### Added
 - Added `/help` command to display available slash commands
