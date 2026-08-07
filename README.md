@@ -46,7 +46,6 @@ Whether you're managing local system scripts, pulling live documentation, or orc
 
 ```text
 omniassist
-├── .env                     # Local environment variables (API keys, ports, secrets - ignored by git)
 ├── .env.example             # Environment variable template/defaults (committed to git)
 ├── .gitignore               # Git exclusion rules (env files, venvs, cache, logs)
 ├── .github/                 # GitHub repository metadata & community guidelines
@@ -54,54 +53,60 @@ omniassist
 │   ├── CONTRIBUTING.md      # Guidelines for submitting pull requests, issues, and code
 │   ├── SECURITY.md          # Vulnerability reporting process and security policies
 │   ├── PULL_REQUEST_TEMPLATE.md # Standard PR checklist, scope, and testing template
-│   └── ISSUE_TEMPLATE/      # GitHub issue creation templates
-│       ├── bug_report.md    # Template for reporting bugs, errors, and reproducible crashes
-│       └── feature_request.md # Template for proposing new sub-agents, tools, or enhancements
-├── venv/                    # Virtual environment directory
-│   └── # ... run python -m venv ./venv to see contents ...
+│   ├── ISSUE_TEMPLATE/      # GitHub issue creation templates
+│   │   ├── bug_report.md    # Template for reporting bugs, errors, and reproducible crashes
+│   │   └── feature_request.md # Template for proposing new sub-agents, tools, or enhancements
+│   └── workflows/          # GitHub Actions workflows
+│       ├── ci.yml           # Continuous integration pipeline
+│       └── lint.yml         # Code linting workflow
+├── CHANGELOG.md             # Version history and release notes
 ├── LICENSE.txt              # MIT License terms and copyright notice
 ├── README.md                # Project documentation, architecture overview, and setup guide
-├── config/                  # Global configuration directory
+├── ann_summary_report.md    # ANN Summary Report
+├── config/
 │   └── config.yml           # Unified YAML configuration file for models, paths, and options
 ├── core/                    # Core agent orchestrator & execution loop
+│   ├── __init__.py
 │   ├── agent.py             # Main OmniAssist class (lifecycle, primary agent loop)
 │   ├── reasoning.py         # Cognitive engine (ReAct, Plan-and-Solve, Self-Reflection)
+│   ├── router.py            # Task routing between internal sub-agents and MCP tools
 │   ├── selfmodify.py        # Code self-rewriting, agent update, and runtime patch logic
-│   ├── state.py             # Active conversation state & runtime context tracking
-│   └── router.py            # Task routing between internal sub-agents and MCP tools
-├── subagents/               # Specialized sub-agents supervised by OmniAssist
-│   ├── base.py              # Abstract base class for specialized sub-agents
-│   ├── research_agent.py    # Information retrieval & document synthesis sub-agent
-│   ├── code_agent.py        # Code generation, execution, and debugging sub-agent
-│   └── planner_agent.py     # Complex task breakdown & multi-step planning sub-agent
+│   └── state.py             # Active conversation state & runtime context tracking
+├── interfaces/              # I/O adapters & communication channels
+│   ├── adapters/            # External messaging adapters
+│   │   └── terminal_adapter.py
+│   ├── api/                 # FastAPI server (REST endpoints & WebSocket streams)
+│   │   └── server.py
+│   └── cli.py               # Interactive terminal interface for OmniAssist
 ├── memory/                  # Multi-tiered memory architecture
 │   ├── conversation.py      # Working memory & short-term message buffer
-│   ├── vector_store.py      # Long-term semantic memory (RAG vector index)
-│   └── session.py           # Session persistence across agent reboots
+│   ├── session.py           # Session persistence across agent reboots
+│   └── vector_store.py      # Long-term semantic memory (RAG vector index)
 ├── mcp_tools/               # Model Context Protocol (MCP) server & tool integrations
-│   ├── registry.py          # Dynamic MCP server connection manager and tool loader
-│   ├── search_tools.py      # MCP search tools (web scraping, API access, knowledge search)
-│   ├── code_runner.py       # MCP code execution environment (sandboxed evaluation)
-│   ├── file_tools.py        # MCP filesystem interface (I/O, directory traversal, file editing)
-│   ├── shell_tool.py        # Tool interface for executing system shell commands
-│   ├── python_tool.py       # Tool interface for evaluating Python snippets
-│   ├── ddgs_search.py       # DuckDuckGo web search integration wrapper via `ddgs`
 │   ├── basic_calc.py        # Arithmetic and standard math tool helper
-│   └── robocalc.py          # Complex calculator (cmath)
-├── interfaces/              # I/O adapters & communication channels
-│   ├── cli.py               # Interactive terminal interface for OmniAssist
-│   ├── api/                 # FastAPI server (REST endpoints & WebSocket streams)
-│   └── adapters/            # External messaging adapters (Slack, SSH, terminal agents)
+│   ├── code_runner.py       # MCP code execution environment (sandboxed evaluation)
+│   ├── ddgs_search.py       # DuckDuckGo web search integration wrapper via `ddgs`
+│   ├── file_tools.py        # MCP filesystem interface (I/O, directory traversal, file editing)
+│   ├── python_tool.py       # Tool interface for evaluating Python snippets
+│   ├── registry.py          # Dynamic MCP server connection manager and tool loader
+│   ├── robocalc.py          # Complex calculator (cmath)
+│   ├── search_tools.py      # MCP search tools (web scraping, API access, knowledge search)
+│   ├── shell_tool.py        # Tool interface for executing system shell commands
+│   └── web_fetch.py         # Web content fetching and parsing
+├── subagents/               # Specialized sub-agents supervised by OmniAssist
+│   ├── base.py              # Abstract base class for specialized sub-agents
+│   ├── code_agent.py        # Code generation, execution, and debugging sub-agent
+│   ├── planner_agent.py     # Complex task breakdown & multi-step planning sub-agent
+│   └── research_agent.py    # Information retrieval & document synthesis sub-agent
 ├── tests/                   # Automated test suite
+│   ├── test_cli.py          # Tests for CLI slash commands
 │   ├── test_core.py         # Unit tests for reasoning loops and agent routing
 │   ├── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
-│   ├── test_shell_tool.py   # Security tests for shell command blocking
-│   └── test_cli.py          # Tests for CLI slash commands
+│   └── test_shell_tool.py   # Security tests for shell command blocking
 ├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
 ├── requirements-dev.txt     # Dev dependencies (includes -r requirements.txt)
 ├── requirements-dev-2.txt   # Standalone dev dependencies (pytest only)
-├── main.py                  # Entry point script (contains embedded model priority & fallback notes)
-└── ann_summary_report.md    # ANN Summary Report
+└── main.py                  # Entry point script (contains embedded model priority & fallback notes)
 ```
 
 ---
