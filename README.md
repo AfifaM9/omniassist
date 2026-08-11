@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/github/v/tag/AfifaM9/omniassist?label=version)
 
-Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.2)
+Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.3)
 
 ---
 
