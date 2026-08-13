@@ -140,7 +140,7 @@ omniassist
 
    **Method C:** Concatenate requirements files
    ```bash
-   python -m pip install -r requirements.txt requirements-dev-2.txt
+   python -m pip install -r requirements.txt -r requirements-dev-2.txt
    ```
 
 ---
