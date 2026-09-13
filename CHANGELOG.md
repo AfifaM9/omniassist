@@ -2,8 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
+
+## [v2026.4] - 2026-09-13
+
+### Changed
+- Bumped version to 2026.4 across `config/config.yml`, `main.py`, `interfaces/cli.py`, `interfaces/api/server.py`, `mcp_tools/search_tools.py` (User-Agent), `README.md`, and `SECURITY.md`
+- Expanded the supported-version table in `SECURITY.md` from 2026.3 to 2026.4
+- Reworked the model fallback chain to try the primary model first and automatically move on to the next fallback when a model call fails (primary: `gemini-3.5-flash-lite` → `gemini-3.1-flash-lite` → `gemini-3-flash` → `gemini-2.5-flash` → `gemini-2.5-flash-lite` → `gemma-4-31B-it` → `gemma-4-26B-A4B-it`)
 
 ## [v2026.3]
 
@@ -38,6 +45,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ### Added
 - Initial Release
 
+[v2026.4]: https://github.com/AfifaM9/omniassist/compare/v2026.3...v2026.4
 [v2026.3]: https://github.com/AfifaM9/omniassist/compare/v2026.2...v2026.3
 [v2026.2]: https://github.com/AfifaM9/omniassist/compare/v2026.1...v2026.2
 [v2026.1]: https://github.com/AfifaM9/omniassist/tree/v2026.1

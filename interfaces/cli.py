@@ -34,7 +34,7 @@ def main():
     console.print(Panel.fit(
         "[bold cyan]OmniAssist[/bold cyan]\n"
         "[italic]Operationalized Multi-Agent Networked Intelligence & "
-        "Autonomous System Services Integration Toolkit (2026.3)[/italic]",
+        "Autonomous System Services Integration Toolkit (2026.4)[/italic]",
         border_style="cyan"
     ))
     console.print("[dim]Type '/help' for commands or 'exit', 'quit', 'q' to terminate session.[/dim]\n")

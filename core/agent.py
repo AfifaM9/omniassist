@@ -24,12 +24,14 @@ class OmniAssist:
         self.router = TaskRouter(self.tool_registry)
         
         self.model_id = "gemini-3.5-flash-lite"
+        self.fallback_models = []
         try:
             config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config", "config.yml")
             if os.path.exists(config_path):
                 with open(config_path, "r", encoding="utf-8") as f:
                     config_data = yaml.safe_load(f)
                     self.model_id = config_data.get("models", {}).get("primary", "gemini-3.5-flash-lite")
+                    self.fallback_models = config_data.get("models", {}).get("fallbacks", []) or []
         except Exception:
             pass
 
@@ -54,6 +56,22 @@ class OmniAssist:
 ### CURRENT CONTEXT & STRATEGIC PLAN:
 {plan}
 """
+
+    def _generate(self, prompt: str, config) -> tuple:
+        """Try each model in the priority chain until one succeeds."""
+        models = [self.model_id] + [m for m in self.fallback_models if m and m != self.model_id]
+        errors = []
+        for model in models:
+            try:
+                response = self.client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                    config=config
+                )
+                return model, response
+            except Exception as e:
+                errors.append(f"{model}: {e}")
+        raise RuntimeError("; ".join(errors))
 
     def run(self, prompt: str) -> str:
         """Executes agent execution loop safely catching internal tool registration issues."""
@@ -80,11 +98,7 @@ class OmniAssist:
 
             config = types.GenerateContentConfig(**config_kwargs)
 
-            response = self.client.models.generate_content(
-                model=self.model_id,
-                contents=prompt,
-                config=config
-            )
+            _model_used, response = self._generate(prompt, config)
 
             if hasattr(response, "function_calls") and response.function_calls:
                 results = []

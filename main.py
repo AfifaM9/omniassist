@@ -1,6 +1,6 @@
 """
 ==============================================================================
- OMNIASSIST ENTRY POINT SCRIPT (2026.3)
+ OMNIASSIST ENTRY POINT SCRIPT (2026.4)
 ==============================================================================
  MODEL PRIORITY & FALLBACK HIERARCHY:
    Primary Model:  Gemini 3.5 Flash-Lite
@@ -10,6 +10,8 @@
    Fallback 4:     Gemini 2.5 Flash-Lite
    Fallback 5:     Gemma 4
    Rule:           Automatically skip deprecated or decommissioned models.
+                   Try the primary model first, then move down the fallback
+                   chain until a model succeeds.
 ==============================================================================
 """
 
