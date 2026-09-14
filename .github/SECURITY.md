@@ -14,8 +14,8 @@ Only the latest stable release and the current active development branch (`main`
 
 | Version | Supported | Why this policy exists |
 | :--- | :--- | :--- |
-| 2026.4+ | :white_check_mark: | Active patches, dependency audits, and continuous penetration testing. |
-| < 2026.4 | :x: | Legacy versions lack modern sandboxing primitives and secure MCP boundaries. |
+| 2026.1+ | :white_check_mark: | Active patches, dependency audits, and continuous penetration testing. |
+| < 2026.1 | :x: | Legacy versions lack modern sandboxing primitives and secure MCP boundaries. |
 
 ---
 ## Reporting a Vulnerability

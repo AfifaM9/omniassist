@@ -1,6 +1,6 @@
 app:
   name: "OmniAssist"
-  version: "2026.4"
+  version: "2026.4 \"Biscotti\""
   description: "Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit"
 
 models:
