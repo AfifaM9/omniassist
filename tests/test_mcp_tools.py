@@ -1,5 +1,7 @@
 import unittest
+
 from mcp_tools.registry import MCPToolRegistry
+
 
 class TestMCPTools(unittest.TestCase):
     def test_registry_loading(self):

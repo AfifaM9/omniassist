@@ -1,5 +1,5 @@
-import unittest
 import re
+import unittest
 
 # Import patterns from cli.py for testing
 QUIT_PATTERN = re.compile(r'^(exit|quit|q)$', re.IGNORECASE)

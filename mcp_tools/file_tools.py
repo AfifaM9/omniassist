@@ -1,5 +1,6 @@
 import os
 
+
 def read_file(file_path: str) -> str:
     """Reads and returns the contents of a specified file."""
     try:

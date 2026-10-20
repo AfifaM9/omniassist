@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## [v2026.6] - 2026-10-19
+
+*Release "2026.6 \"Dirt Cake\"".*
+
+### Changed
+- **Model hierarchy refreshed.** Primary model is now `gemini-3.6-flash-lite`; `gemini-3.5-flash-lite` and the previous chain follow as fallbacks (`gemini-3.6-flash-lite` -> `gemini-3.5-flash-lite` -> `gemini-3.1-flash-lite` -> `gemini-3-flash` -> `gemini-2.5-flash` -> `gemini-2.5-flash-lite` -> `gemma-4-31B-it` -> `gemma-4-26B-A4B-it`).
+- Bumped version to 2026.6 across `config/config.yml`, `main.py`, `interfaces/cli.py`, `interfaces/api/server.py`, and `mcp_tools/search_tools.py` (User-Agent).
+
 ## [v2026.4] - 2026-09-13
 
 ### Changed
@@ -45,6 +53,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 ### Added
 - Initial Release
 
+[v2026.6]: https://github.com/AfifaM9/omniassist/tree/v2026.6
 [v2026.4]: https://github.com/AfifaM9/omniassist/compare/v2026.3...v2026.4
 [v2026.3]: https://github.com/AfifaM9/omniassist/compare/v2026.2...v2026.3
 [v2026.2]: https://github.com/AfifaM9/omniassist/compare/v2026.1...v2026.2

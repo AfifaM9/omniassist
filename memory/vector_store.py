@@ -1,4 +1,3 @@
-import os
 
 class VectorStore:
     """Long-term semantic memory (RAG vector index interface)."""

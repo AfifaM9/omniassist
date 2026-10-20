@@ -1,6 +1,7 @@
 import json
 import os
 
+
 class SessionPersistence:
     """Session state saving and loading across agent reboots."""
     def __init__(self, session_file: str = "./data/session_state.json"):
