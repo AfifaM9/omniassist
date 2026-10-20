@@ -1,0 +1,32 @@
+# Ruff configuration.
+#
+# The rule set is pinned explicitly rather than relying on ruff's defaults,
+# so a new ruff release cannot turn CI red without a change in this repo.
+
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = [
+    "E4",  # pycodestyle: imports
+    "E7",  # pycodestyle: statements
+    "E9",  # pycodestyle: runtime
+    "F",   # pyflakes
+    "I",   # isort
+    "W",   # pycodestyle: warnings
+]
+
+ignore = [
+    # This framework deliberately catches broad exceptions at the tool
+    # boundary: one failing tool must not take down the agent loop. Each
+    # handler logs or returns the error to the model.
+    "BLE001",
+    # `run_python` exists specifically to evaluate snippets via exec.
+    "S102",
+    # subprocess without check= is intentional; tool callers inspect the
+    # returned stdout/stderr and exit code instead of raising.
+    "PLW1510",
+    # The tests unpack the first element of the (blocked, reason) tuple
+    # purely for readability.
+    "RUF059",
+]

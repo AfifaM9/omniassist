@@ -1,12 +1,16 @@
 # OmniAssist 🚀
 
+> [!NOTE]
+>
+> This is the **CLI** version of OmniAssist. For the graphical interface, see the [OmniAssist GUI Repository](https://github.com/AfifaM9/omniassist-gui) (sister project).
+
 ![CI](https://img.shields.io/badge/CI-Active-green)
 ![Lint](https://img.shields.io/badge/Lint-Active-green)
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/github/v/tag/AfifaM9/omniassist?label=version)
 
-Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.4 "Biscotti")
+Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.6 "Dirt Cake")
 
 ---
 

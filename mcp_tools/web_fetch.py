@@ -1,12 +1,13 @@
 import urllib.request
 
+
 def web_fetch(url: str) -> str:
     """Fetches the contents of a webpage in clean markdown format using Jina Reader (https://r.jina.ai/) without requiring an API key."""
     try:
         target_url = url.strip()
         if not target_url.startswith("http://") and not target_url.startswith("https://"):
             target_url = "https://" + target_url
-            
+
         jina_url = f"https://r.jina.ai/{target_url}"
         req = urllib.request.Request(
             jina_url,

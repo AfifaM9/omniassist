@@ -1,5 +1,5 @@
-import subprocess
 import re
+import subprocess
 
 SENSITIVE_DIRS = {'/', '/home', '/etc', '/var', '/usr', '/bin', '/sbin', '/lib', '/root', '/tmp', '/boot', '/dev', '/proc', '/sys'}
 FORK_BOMB_PATTERNS = [
@@ -10,8 +10,6 @@ def _is_blocked_command(command: str) -> tuple[bool, str]:
     """Check if command is blocked. Returns (is_blocked, reason)."""
     if not command or not command.strip():
         return True, "Empty command"
-
-    command_lower = command.lower()
 
     # Check for fork bombs (case insensitive, handles newlines)
     for pattern in FORK_BOMB_PATTERNS:

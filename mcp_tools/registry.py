@@ -1,6 +1,8 @@
 import importlib
 import pkgutil
+
 import mcp_tools
+
 
 class MCPToolRegistry:
     """Dynamically discovers and executes registered Model Context Protocol (MCP) tools."""

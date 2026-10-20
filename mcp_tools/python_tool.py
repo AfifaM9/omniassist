@@ -1,6 +1,7 @@
-import sys
 import io
+import sys
 import traceback
+
 
 def run_python(code: str) -> str:
     """Dynamically evaluates a Python code snippet and captures stdout/stderr."""
@@ -8,10 +9,10 @@ def run_python(code: str) -> str:
     old_stderr = sys.stderr
     redirected_out = io.StringIO()
     redirected_err = io.StringIO()
-    
+
     sys.stdout = redirected_out
     sys.stderr = redirected_err
-    
+
     try:
         exec(code, {})
         output = redirected_out.getvalue()

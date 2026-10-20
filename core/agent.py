@@ -1,11 +1,13 @@
 import os
+
 import yaml
 from google import genai
 from google.genai import types
-from core.state import ConversationState
+
 from core.reasoning import CognitiveEngine
-from core.selfmodify import SelfModifier
 from core.router import TaskRouter
+from core.selfmodify import SelfModifier
+from core.state import ConversationState
 from mcp_tools.registry import MCPToolRegistry
 
 try:
@@ -22,15 +24,15 @@ class OmniAssist:
         self.self_modifier = SelfModifier()
         self.tool_registry = MCPToolRegistry()
         self.router = TaskRouter(self.tool_registry)
-        
-        self.model_id = "gemini-3.5-flash-lite"
+
+        self.model_id = "gemini-3.6-flash-lite"
         self.fallback_models = []
         try:
             config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config", "config.yml")
             if os.path.exists(config_path):
                 with open(config_path, "r", encoding="utf-8") as f:
                     config_data = yaml.safe_load(f)
-                    self.model_id = config_data.get("models", {}).get("primary", "gemini-3.5-flash-lite")
+                    self.model_id = config_data.get("models", {}).get("primary", "gemini-3.6-flash-lite")
                     self.fallback_models = config_data.get("models", {}).get("fallbacks", []) or []
         except Exception:
             pass
@@ -76,7 +78,7 @@ class OmniAssist:
     def run(self, prompt: str) -> str:
         """Executes agent execution loop safely catching internal tool registration issues."""
         self.state.add_message("user", prompt)
-        
+
         plan = self.reasoning.evaluate_plan(prompt)
         system_prompt = self._build_system_prompt(plan)
 #f"You are OmniAssist, an advanced AI operational agent. Context plan: {plan}."
@@ -87,7 +89,7 @@ class OmniAssist:
             raw_tools = getattr(self.tool_registry, "tools", [])
             if isinstance(raw_tools, dict):
                 raw_tools = list(raw_tools.values())
-            
+
             for t in raw_tools:
                 if callable(t) and not isinstance(t, type):
                     tools_list.append(t)

@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+
 from core.agent import OmniAssist
 
-app = FastAPI(title="OmniAssist API", version="2026.4 \"Biscotti\"")
+app = FastAPI(title="OmniAssist API", version="2026.6 \"Dirt Cake\"")
 agent = OmniAssist()
 
 class PromptRequest(BaseModel):
