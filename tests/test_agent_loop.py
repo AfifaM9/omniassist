@@ -174,7 +174,13 @@ class TestToolExecution(unittest.TestCase):
             FakeResponse(text="handled"),
         ])
         agent.run("read that image")
-        self.assertIn("file not found", agent.last_tool_log[0]["result"])
+        result = agent.last_tool_log[0]["result"]
+        # The call must reach the real tool. Which error surfaces depends on the
+        # host: a missing input file, or a missing tesseract binary on CI images.
+        self.assertTrue(
+            "file not found" in result or "OCR unavailable" in result,
+            f"unexpected tool result: {result!r}",
+        )
 
 
 class TestLoopControl(unittest.TestCase):
