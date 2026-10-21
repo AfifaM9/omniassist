@@ -1,6 +1,11 @@
 import re
 import sys
 
+try:  # pragma: no cover - readline is unavailable on some platforms (e.g. Windows)
+    import readline  # noqa: F401  # side-effect import; enables arrow-key input history
+except ImportError:  # pragma: no cover
+    readline = None
+
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel

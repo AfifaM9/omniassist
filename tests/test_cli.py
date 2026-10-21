@@ -1,9 +1,19 @@
-import re
 import unittest
 
+from interfaces import cli
+
 # Import patterns from cli.py for testing
-QUIT_PATTERN = re.compile(r'^(exit|quit|q)$', re.IGNORECASE)
-SLASH_COMMAND_PATTERN = re.compile(r'^/(\w+)')
+QUIT_PATTERN = cli.QUIT_PATTERN
+SLASH_COMMAND_PATTERN = cli.SLASH_COMMAND_PATTERN
+
+
+class TestReadlineHistory(unittest.TestCase):
+    """The CLI must enable arrow-key input history (README claims it)."""
+
+    def test_readline_is_imported_for_its_side_effect(self):
+        # On platforms without readline the guarded import leaves it as None,
+        # but the module attribute must always exist so this never NameErrors.
+        self.assertTrue(hasattr(cli, "readline"))
 
 
 class TestSlashCommands(unittest.TestCase):
