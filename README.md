@@ -10,7 +10,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Version](https://img.shields.io/github/v/tag/AfifaM9/omniassist?label=version)
 
-Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.6 "Dirt Cake")
+Operationalized Multi-Agent Networked Intelligence & Autonomous System Services Integration Toolkit (2026.7 "Eton Mass")
 
 ---
 
@@ -43,6 +43,8 @@ Whether you're managing local system scripts, pulling live documentation, or orc
 - **Robust Error Handling:** Intercepts runtime exceptions, LLM formatting issues, and tool-registry mismatches gracefully to keep the session alive.
 - **Modular Sub-system Architecture:** Separates core agent lifecycle management, cognitive reasoning plans, self-modification utilities, and MCP tool registries into distinct, maintainable modules.
 - **Secure Environment Management:** Strictly isolates configuration credentials via `.env` files and `.gitignore` safety guards.
+- **OCR & Document Ingestion:** Reads text from images and scanned PDFs through the host Tesseract engine.
+- **Long-Term Semantic Memory:** Recalls relevant notes from earlier sessions via a persisted vector index that degrades gracefully when optional embedding backends are unavailable.
 
 ---
 
@@ -91,6 +93,7 @@ omniassist
 │   ├── code_runner.py       # MCP code execution environment (sandboxed evaluation)
 │   ├── ddgs_search.py       # DuckDuckGo web search integration wrapper via `ddgs`
 │   ├── file_tools.py        # MCP filesystem interface (I/O, directory traversal, file editing)
+│   ├── ocr_tool.py          # OCR via the host Tesseract binary (images and PDFs)
 │   ├── python_tool.py       # Tool interface for evaluating Python snippets
 │   ├── registry.py          # Dynamic MCP server connection manager and tool loader
 │   ├── robocalc.py          # Complex calculator (cmath)
@@ -103,9 +106,13 @@ omniassist
 │   ├── planner_agent.py     # Complex task breakdown & multi-step planning sub-agent
 │   └── research_agent.py    # Information retrieval & document synthesis sub-agent
 ├── tests/                   # Automated test suite
+│   ├── test_agent_loop.py   # Agent execution loop, tool dispatch, and memory wiring
 │   ├── test_cli.py          # Tests for CLI slash commands
 │   ├── test_core.py         # Unit tests for reasoning loops and agent routing
+│   ├── test_fallback_chain.py # Model fallback ordering and error handling
 │   ├── test_mcp_tools.py    # Integration tests for MCP tool calls and error recovery
+│   ├── test_memory.py       # Vector store and semantic recall tests
+│   ├── test_ocr_tool.py     # OCR extraction tests for images and PDFs
 │   └── test_shell_tool.py   # Security tests for shell command blocking
 ├── requirements.txt         # Dependency declarations (MCP SDK, LLM frameworks, vector stores)
 ├── requirements-dev.txt     # Dev dependencies (includes -r requirements.txt)
@@ -182,7 +189,29 @@ Once loaded, you can chat with OmniAssist or issue direct commands:
 
 ## Tool Ecosystem & MCP Integration
 
-OmniAssist utilizes a dynamic registry located in `mcp_tools/` to discover and bind callable Python functions. The agent inspects available tool objects, filters out non-callable classes, and maps model function calls directly to execution handlers in `core/router.py`.
+OmniAssist utilizes a dynamic registry located in `mcp_tools/` to discover and bind callable Python functions. Any public callable in a module under `mcp_tools/` is registered automatically. The agent filters out non-callable classes and dispatches model function calls through `MCPToolRegistry.execute_tool`, feeding each result back to the model until it produces a final answer.
+
+The SDK's automatic function calling is deliberately **disabled**. It is enabled by default in `google-genai` and would execute tools inside the SDK, hidden from the agent loop. Disabling it guarantees a single execution path where every tool call is recorded.
+
+### OCR
+
+OCR is backed by the host `tesseract` binary, invoked as a subprocess rather than through `pytesseract`, so only the system package is required:
+
+```bash
+sudo apt install tesseract-ocr tesseract-ocr-eng poppler-utils
+```
+
+| Tool | Purpose |
+| --- | --- |
+| `ocr_image` | Extract text from an image, or dispatch a `.pdf` path to `ocr_pdf` |
+| `ocr_pdf` | Rasterise the first `max_pages` pages and OCR each one |
+| `ocr_languages` | List the language packs installed on this host |
+
+### Long-Term Memory
+
+`memory/vector_store.py` provides a persistent semantic index. It prefers `sentence-transformers` embeddings and falls back to a deterministic hashing embedder when that optional dependency (or its model download) is unavailable, so recall keeps working offline. Each completed turn is recorded and recalled into the system prompt on later questions.
+
+Storage lives under `./data/` by default; override with `OMNIASSIST_MEMORY_DIR`. Use `/memory` inside the CLI to inspect the backend, storage path, and document count.
 
 ---
 

@@ -26,16 +26,45 @@ def show_help():
     table.add_column("Description")
 
     table.add_row("/help", "Show this help message")
+    table.add_row("/memory", "Show long-term memory status and recent notes")
 
     console.print(table)
     console.print()
+
+def show_memory(agent):
+    """Display long-term semantic memory status."""
+    store = getattr(agent, "memory", None)
+    if store is None or not getattr(agent, "memory_enabled", True):
+        console.print("[yellow]Long-term memory is disabled.[/yellow]\n")
+        return
+
+    table = Table(show_header=True, header_style="bold magenta")
+    table.add_column("Property", style="cyan", width=18)
+    table.add_column("Value")
+    table.add_row("Backend", str(store.backend))
+    table.add_row("Storage", str(store.storage_path))
+    table.add_row("Documents", str(len(store)))
+
+    recent = sorted(store.search("", top_k=5), key=lambda item: item["doc_id"]) if len(store) else []
+    console.print(table)
+    if recent:
+        console.print()
+        notes = Table(show_header=True, header_style="bold magenta")
+        notes.add_column("Doc ID", style="cyan", width=14)
+        notes.add_column("Preview")
+        for item in recent:
+            preview = " ".join(str(item["text"]).split())[:70]
+            notes.add_row(str(item["doc_id"]), preview)
+        console.print(notes)
+    console.print()
+
 
 def main():
     """Interactive CLI rendering responses cleanly using Rich Markdown panels."""
     console.print(Panel.fit(
         "[bold cyan]OmniAssist[/bold cyan]\n"
         "[italic]Operationalized Multi-Agent Networked Intelligence & "
-        "Autonomous System Services Integration Toolkit (2026.6 \"Dirt Cake\")[/italic]",
+        "Autonomous System Services Integration Toolkit (2026.7 \"Eton Mass\")[/italic]",
         border_style="cyan"
     ))
     console.print("[dim]Type '/help' for commands or 'exit', 'quit', 'q' to terminate session.[/dim]\n")
@@ -61,6 +90,9 @@ def main():
                 command = slash_match.group(1).lower()
                 if command == "help":
                     show_help()
+                    continue
+                if command == "memory":
+                    show_memory(agent)
                     continue
                 else:
                     console.print(f"[yellow]Unknown command: /{command}. Type '/help' for available commands.[/yellow]\n")

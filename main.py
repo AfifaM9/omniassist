@@ -1,6 +1,6 @@
 """
 ==============================================================================
- OMNIASSIST ENTRY POINT SCRIPT (2026.6 "Dirt Cake")
+ OMNIASSIST ENTRY POINT SCRIPT (2026.7 "Eton Mass")
 ==============================================================================
  MODEL PRIORITY & FALLBACK HIERARCHY:
    Primary Model:  Gemini 3.6 Flash-Lite
