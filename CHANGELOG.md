@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/).
 
+## [v2026.7] - 2026-10-21
+
+*Release "2026.7 \"Eton Mass\"".*
+
+### Added
+- **OCR tooling** (`mcp_tools/ocr_tool.py`): `ocr_image`, `ocr_pdf`, and `ocr_languages`, backed by the host Tesseract binary and invoked as a subprocess so no Python binding is required. Handles images, multi-page PDFs (via `pdftoppm`), language-pack validation, and blank/unreadable inputs.
+- **Long-term semantic memory** (`memory/vector_store.py`): a persisted vector index with `add_document`, `search`, `get_document`, `save`, `load`, and `clear`. Uses `sentence-transformers` when available and falls back to a deterministic hashing embedder otherwise; vectors are recomputed automatically when the backend changes.
+- Agent memory integration: completed turns are stored and relevant notes are recalled into the system prompt. New `recall()` and `remember()` methods, plus `OMNIASSIST_MEMORY_DIR` to relocate storage.
+- `/memory` CLI command showing the embedding backend, storage path, document count, and recent notes.
+- Test suites `tests/test_agent_loop.py`, `tests/test_memory.py`, and `tests/test_ocr_tool.py` (125 tests total, up from 68).
+
+### Fixed
+- **Tool calls never executed.** `core/agent.py` dispatched to `self.router.execute(...)`, but `TaskRouter` only defines `route()`. The `hasattr` guard silently degraded every tool call to the literal string `"Executed <tool>"`, so no tool ever ran. Tool calls now dispatch through `MCPToolRegistry.execute_tool`, and results are fed back to the model until it produces a final answer.
+- **Automatic function calling bypassed the agent loop.** `google-genai` enables it by default, executing tools inside the SDK where they were invisible to `last_tool_log` and to memory. It is now explicitly disabled so there is a single, observable execution path.
+- **Multi-turn tool conversations were malformed.** The model's function-call turn was not preserved before appending results, and `max_iterations` was loaded but unused. The loop now appends the model turn, honours `max_iterations`, and reports when the cap is reached.
+- Memory turn identifiers were off by one (`turn-1` for the first exchange).
+
+### Changed
+- Bumped version to 2026.7 across `config/config.yml`, `main.py`, `interfaces/cli.py`, `interfaces/api/server.py`, `mcp_tools/search_tools.py` (User-Agent), and `README.md`.
+- Added `python-dotenv` to `requirements.txt`; `.env` was previously never loaded because the dependency was undeclared.
+- README corrected: tool calls are documented as routing through the MCP registry rather than `core/router.py`, and the test tree now lists all suites.
+
 ## [v2026.6] - 2026-10-19
 
 *Release "2026.6 \"Dirt Cake\"".*
