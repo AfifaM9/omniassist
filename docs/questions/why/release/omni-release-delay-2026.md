@@ -16,11 +16,16 @@ release is planned; the version line resumes at **v2027.1**.
 
 ## Why
 
-Omni is a terminal-first interface, and the browser interface in GUI Omni now carries the
-project's day-to-day development. Rather than ship an incremental CLI release, Omni's next
-release is being held so that it can land the work that follows GUI Omni's recent releases
-(the v2026.8 "French Macaron" and v2026.9 "Galette" lines) together in a single, coherent
-2027 release.
+The delay is not technical. It comes down to maintainer capacity:
+
+- **The CLI is not currently being actively maintained.** The project owner's attention is on
+  GUI Omni, and CLI release work is not happening on a regular cadence.
+- **No one has stepped up to take it on.** Release duties have not been picked up by anyone
+  else, and the people who would like to help do not currently have the time.
+
+Rather than publish a release that nobody has had the time to prepare and test, the next
+release is deferred to **v2027.1**, with the expectation that maintainer capacity returns
+by then.
 
 ## What is unaffected
 
@@ -30,6 +35,12 @@ release is being held so that it can land the work that follows GUI Omni's recen
   installable; nothing is withdrawn.
 - **This repository stays open.** Issues and pull requests are still welcome; changes are
   simply not cut into a release until v2027.1.
+
+## How to help
+
+If you would like the CLI to move again before v2027.1, the most useful thing is to help
+maintain it — triaging issues, reviewing pull requests, or taking on release preparation.
+Contributions are welcome and do not have to wait for a release to be reviewed and merged.
 
 ## Related
 
